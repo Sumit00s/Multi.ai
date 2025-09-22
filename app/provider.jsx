@@ -17,6 +17,7 @@ export default function Provider({ children, ...props }) {
 
   const [aiSelectedModels, setAiSelectedModels] = useState(DefaultModel);
   const [userDetail, setUserDetail] = useState();
+  const [messages, setMessages] = useState({});
 
   useEffect(() => {
     if (user) CreateNewUser();
@@ -35,7 +36,7 @@ export default function Provider({ children, ...props }) {
     if (userSnap.exists()) {
       console.log("Existing User");
       const userInfo = userSnap.data();
-      setAiSelectedModels(userInfo?.selectedModelPref);
+      setAiSelectedModels(userInfo?.selectedModelPref ?? DefaultModel);
       setUserDetail(userInfo);
       return;
     } else {
@@ -64,7 +65,12 @@ export default function Provider({ children, ...props }) {
     >
       <UserDetailContext.Provider value={{ userDetail, setUserDetail }}>
         <AiSelectedModelContext.Provider
-          value={{ aiSelectedModels, setAiSelectedModels }}
+          value={{
+            aiSelectedModels,
+            setAiSelectedModels,
+            messages,
+            setMessages,
+          }}
         >
           <SidebarProvider>
             <AppSidebar />
