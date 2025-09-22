@@ -13,6 +13,7 @@ import { Ghost, Moon, Plus, Sun, Zap } from "lucide-react";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import CreditProgress from "./CreditProgress";
+import PaymentModel from "./PaymentModel";
 
 export default function AppSidebar() {
   const { theme, setTheme } = useTheme();
@@ -79,11 +80,13 @@ export default function AppSidebar() {
               </Button>
             </SignInButton>
           ) : (
-            <div className="flex flex-col gap-5">
+            <div className="flex flex-col gap-3">
               <CreditProgress />
-              <Button className={"w-full"}>
-                <Zap /> Upgrade Plan
-              </Button>
+              <PaymentModel>
+                <Button className={"w-full"}>
+                  <Zap /> Upgrade Plan
+                </Button>
+              </PaymentModel>
               <div className=" flex items-center justify-center gap-2">
                 <UserButton />
                 <p>{user.fullName}</p>
